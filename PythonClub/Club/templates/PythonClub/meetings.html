@@ -8,8 +8,7 @@
     </tr>
     {% for t in meeting_list %}
     <tr>
-        <td>{{ t.id }}</td>
-        <td>{{ t.title }}</td>
+        <td><a href="{% url 'meetingdetails' id=t.id %}">{{ t.title }}</a></td>
         <td>{{ t.agenda }}</td>
     </tr>
 
