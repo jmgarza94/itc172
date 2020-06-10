@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Meeting, MeetingMinutes, Resource, Event
 from .views import index, getMeetings, meetingdetails, getResources
+from .forms import MeetingForm
 
 # Create your tests here.
 
@@ -55,11 +56,7 @@ class GetMeetingsTest(TestCase):
        self.assertEqual(response.status_code, 200)
 
 
-def setUp(self):
-        self.u=User.objects.create(username='myuser')
-        self.type=ProductType.objects.create(typename='laptop')
-        self.prod = Product.objects.create(productname='product1', producttype=self.type, user=self.u, productprice=500, productentrydate='2019-04-02', productdescription="a product")
-        self.rev1=Review.objects.create(reviewtitle='prodreview', reviewdate='2019-04-03', product=self.prod, reviewrating=4, reviewtext='some review')
-        self.rev1.user.add(self.u)
-        self.rev2=Review.objects.create(reviewtitle='prodreview', reviewdate='2019-04-03', product=self.prod,  reviewrating=4, reviewtext='some review')
-        self.rev2.user.add(self.u)
+class Meeting_Form_Test(TestCase):
+    def test_typeform_is_valid(self):
+        form = MeetingForm(data={'title': "Title1", 'date' : "Today", 'time' : "Now", 'location' : "Here", 'agenda' : "Stuff"})
+        self.assertTrue(form.is_valid())
